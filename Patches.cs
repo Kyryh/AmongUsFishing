@@ -74,7 +74,13 @@ namespace AmongUsFishing {
         }
 
         public static void RandomizeFishSprite(this CatchFishMinigame minigame) {
-            minigame.ChangeFishSprite((byte)Random.Range(0, minigame.fishCounterSprites.Length));
+            int spriteIndex;
+            if (minigame.fishCounterSprites.Length > 8 && Random.value <= ModConfig.CustomFishProbability.Value)
+                spriteIndex = Random.Range(8, minigame.fishCounterSprites.Length);
+            else
+                spriteIndex = Random.Range(0, 8);
+
+            minigame.ChangeFishSprite((byte)spriteIndex);
         }
         public static void ChangeFishSprite(this CatchFishMinigame minigame, byte spriteIndex) {
             minigame.MyNormTask.Data[1] = spriteIndex;

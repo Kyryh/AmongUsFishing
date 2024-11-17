@@ -14,6 +14,7 @@ using UObject = UnityEngine.Object;
 namespace AmongUsFishing {
     internal static class ModConfig {
         public static ConfigEntry<KeyCode> FishingKey { get; private set; }
+        public static ConfigEntry<float> CustomFishProbability { get; private set; }
 
         public static Sprite[] FishSprites { get; private set; }
 
@@ -31,6 +32,16 @@ namespace AmongUsFishing {
                 "FishingKey",
                 KeyCode.P,
                 "The key to use to start (and stop) fishing"
+            );
+
+            CustomFishProbability = config.Bind(
+                "Fish",
+                "CustomFishProbability",
+                0.10f,
+                new ConfigDescription(
+                    "The probability that you catch a custom fish",
+                    new AcceptableValueRange<float>(0f, 1f)
+                )
             );
         }
 
