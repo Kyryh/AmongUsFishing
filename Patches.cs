@@ -37,6 +37,9 @@ namespace AmongUsFishing {
         [HarmonyPatch(typeof(_CoUpdateProgress_d__42), nameof(_CoUpdateProgress_d__42.MoveNext))]
         [HarmonyPrefix]
         static bool CoUpdateProgressPatch(_CoUpdateProgress_d__42 __instance, ref bool __result) {
+            if (__instance.__4__this != Plugin.MinigameInstance)
+                return true;
+
             // This updates the task's progress and we definitely don't want that
             // since this isn't a real task, so we skip it completely
             // Also we start the CoBeginFishing coroutine since
@@ -55,6 +58,9 @@ namespace AmongUsFishing {
         [HarmonyPatch(typeof(_CoAnimateCaughtFish_d__41), nameof(_CoAnimateCaughtFish_d__41.MoveNext))]
         [HarmonyPrefix]
         static bool CoAnimateCaughtFishPatch(_CoAnimateCaughtFish_d__41 __instance, ref bool __result) {
+            if (__instance.__4__this != Plugin.MinigameInstance)
+                return true;
+
             // This just does some animation stuff or something idk
             // The last step calls CatchFishMinigame.SetCaughtFish and increments
             // CatchFishMinigame.numCaughtFish, so we skip only the last step

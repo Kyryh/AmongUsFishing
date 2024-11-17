@@ -17,7 +17,7 @@ public class Plugin : BasePlugin
 
     static CatchFishMinigame minigamePrefab;
 
-    static CatchFishMinigame minigameInstance;
+    public static CatchFishMinigame MinigameInstance { get; private set; }
     static NormalPlayerTask minigameTask;
     public static CatchFishMinigame MinigamePrefab {
         get {
@@ -48,24 +48,24 @@ public class Plugin : BasePlugin
     }
 
     public static void ToggleFishingMinigame() {
-        if (minigameInstance == null) {
-            minigameInstance = UObject.Instantiate(MinigamePrefab, Camera.main.transform, false);
-            minigameInstance.transform.Find("FishCounters").gameObject.SetActive(false);
-            minigameInstance.transform.localPosition = new Vector3(0.0f, 0.0f, -50f);
-            minigameInstance.fishCounterSprites = AllFishSprites;
-            minigameTask = minigameInstance.gameObject.AddComponent<NormalPlayerTask>();
+        if (MinigameInstance == null) {
+            MinigameInstance = UObject.Instantiate(MinigamePrefab, Camera.main.transform, false);
+            MinigameInstance.transform.Find("FishCounters").gameObject.SetActive(false);
+            MinigameInstance.transform.localPosition = new Vector3(0.0f, 0.0f, -50f);
+            MinigameInstance.fishCounterSprites = AllFishSprites;
+            minigameTask = MinigameInstance.gameObject.AddComponent<NormalPlayerTask>();
             minigameTask.Data = new byte[4];
         }
 
-        if (!minigameInstance.isActiveAndEnabled) {
+        if (!MinigameInstance.isActiveAndEnabled) {
             if (Minigame.Instance == null) {
-                minigameInstance.gameObject.SetActive(true);
-                minigameInstance.Begin(minigameTask);
-                minigameInstance.RandomizeFishSprite();
+                MinigameInstance.gameObject.SetActive(true);
+                MinigameInstance.Begin(minigameTask);
+                MinigameInstance.RandomizeFishSprite();
             }
         }
         else {
-            minigameInstance.Close();
+            MinigameInstance.Close();
         }
     }
 }
