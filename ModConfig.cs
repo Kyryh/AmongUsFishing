@@ -59,7 +59,8 @@ namespace AmongUsFishing {
             UObject.DontDestroyOnLoad(texture);
             texture.hideFlags |= HideFlags.HideAndDontSave;
 
-            var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
+            var pixelsPerUnit = Math.Max(texture.width, texture.height) / 2;
+            var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f), pixelsPerUnit);
             UObject.DontDestroyOnLoad(sprite);
             sprite.hideFlags |= HideFlags.HideAndDontSave;
 
