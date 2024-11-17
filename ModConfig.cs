@@ -14,8 +14,16 @@ namespace AmongUsFishing {
     internal static class ModConfig {
         public static ConfigEntry<KeyCode> FishingKey { get; private set; }
 
+        public static Sprite[] FishSprites { get; private set; }
+
         public static void Init(ConfigFile config) {
             InitFishSpritesFolder(Paths.ConfigPath, out var fishSpritesFolder);
+
+            FishSprites = Directory
+                .EnumerateFiles(fishSpritesFolder)
+                .Select(File.ReadAllBytes)
+                .Select(SpriteFromImage)
+                .ToArray();
 
             FishingKey = config.Bind(
                 "Input",
@@ -43,5 +51,8 @@ namespace AmongUsFishing {
             }
         }
 
+        static Sprite SpriteFromImage(byte[] bytes) {
+            throw new NotImplementedException();
+        }
     }
 }
