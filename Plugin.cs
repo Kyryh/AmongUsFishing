@@ -45,6 +45,7 @@ public class Plugin : BasePlugin
             minigameInstance.transform.localPosition = new Vector3(0.0f, 0.0f, -50f);
             minigameTask = minigameInstance.gameObject.AddComponent<NormalPlayerTask>();
             minigameTask.Data = new byte[4];
+            minigameInstance.RandomizeFishSprite();
         }
 
         if (!minigameInstance.isActiveAndEnabled) {

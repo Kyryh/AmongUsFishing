@@ -67,10 +67,10 @@ namespace AmongUsFishing {
             return true;
         }
 
-        static void RandomizeFishSprite(this CatchFishMinigame minigame) {
+        public static void RandomizeFishSprite(this CatchFishMinigame minigame) {
             minigame.ChangeFishSprite((byte)Random.Range(0, minigame.fishCounterSprites.Length));
         }
-        static void ChangeFishSprite(this CatchFishMinigame minigame, byte spriteIndex) {
+        public static void ChangeFishSprite(this CatchFishMinigame minigame, byte spriteIndex) {
             minigame.MyNormTask.Data[1] = spriteIndex;
         }
 
