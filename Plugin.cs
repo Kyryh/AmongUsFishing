@@ -33,6 +33,7 @@ public class Plugin : BasePlugin
         Log = base.Log;
 
         Patches.Init();
+        ModConfig.Init(Config);
 
 
         Log.LogInfo($"Plugin {MyPluginInfo.PLUGIN_GUID} is loaded!");

@@ -29,7 +29,7 @@ namespace AmongUsFishing {
         [HarmonyPostfix]
         static void CheckInput() {
 
-            if (Input.GetKeyDown(KeyCode.P)) {
+            if (Input.GetKeyDown(ModConfig.FishingKey.Value)) {
                 Plugin.ToggleFishingMinigame();
             }
         }
