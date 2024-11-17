@@ -2,6 +2,7 @@
 using BepInEx.Logging;
 using BepInEx.Unity.IL2CPP;
 using System;
+using System.Linq;
 using UnityEngine;
 using UObject = UnityEngine.Object;
 
@@ -26,8 +27,14 @@ public class Plugin : BasePlugin
             if (minigamePrefab != null)
                 throw new InvalidOperationException();
             minigamePrefab = value;
+            allFishSprites = value.fishCounterSprites.Concat(ModConfig.FishSprites).ToArray();
         } 
     }
+
+    static Sprite[] allFishSprites;
+    public static Sprite[] AllFishSprites => allFishSprites;
+    
+
     public override void Load() {
         // Plugin startup logic
         Log = base.Log;
@@ -45,7 +52,7 @@ public class Plugin : BasePlugin
             minigameInstance = UObject.Instantiate(MinigamePrefab, Camera.main.transform, false);
             minigameInstance.transform.Find("FishCounters").gameObject.SetActive(false);
             minigameInstance.transform.localPosition = new Vector3(0.0f, 0.0f, -50f);
-            minigameInstance.fishCounterSprites = ModConfig.FishSprites;
+            minigameInstance.fishCounterSprites = AllFishSprites;
             minigameTask = minigameInstance.gameObject.AddComponent<NormalPlayerTask>();
             minigameTask.Data = new byte[4];
         }
