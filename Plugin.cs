@@ -58,9 +58,11 @@ public class Plugin : BasePlugin
         }
 
         if (!minigameInstance.isActiveAndEnabled) {
-            minigameInstance.gameObject.SetActive(true);
-            minigameInstance.Begin(minigameTask);
-            minigameInstance.RandomizeFishSprite();
+            if (Minigame.Instance == null) {
+                minigameInstance.gameObject.SetActive(true);
+                minigameInstance.Begin(minigameTask);
+                minigameInstance.RandomizeFishSprite();
+            }
         }
         else {
             minigameInstance.Close();
