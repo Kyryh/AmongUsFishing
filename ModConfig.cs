@@ -20,13 +20,11 @@ namespace AmongUsFishing {
         public static void Init(ConfigFile config) {
             InitFishSpritesFolder(Paths.ConfigPath, out var fishSpritesFolder);
 
-            FishSprites = Plugin.MinigamePrefab
-                .fishCounterSprites.Concat(
-                    Directory
-                    .EnumerateFiles(fishSpritesFolder)
-                    .Select(File.ReadAllBytes)
-                    .Select(SpriteFromImage)
-                ).ToArray();
+            FishSprites = Directory
+                .EnumerateFiles(fishSpritesFolder)
+                .Select(File.ReadAllBytes)
+                .Select(SpriteFromImage)
+                .ToArray();
 
             FishingKey = config.Bind(
                 "Input",
