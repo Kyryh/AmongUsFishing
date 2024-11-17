@@ -15,7 +15,7 @@ namespace AmongUsFishing {
         public static ConfigEntry<KeyCode> FishingKey { get; private set; }
 
         public static void Init(ConfigFile config) {
-            InitFishSpritesFolder(Paths.ConfigPath);
+            InitFishSpritesFolder(Paths.ConfigPath, out var fishSpritesFolder);
 
             FishingKey = config.Bind(
                 "Input",
@@ -25,8 +25,8 @@ namespace AmongUsFishing {
             );
         }
 
-        static void InitFishSpritesFolder(string path) {
-            var fishSpritesFolder = Path.Combine(path, $"{Plugin.GUID}-FishSprites");
+        static void InitFishSpritesFolder(string path, out string fishSpritesFolder) {
+            fishSpritesFolder = Path.Combine(path, $"{Plugin.GUID}-FishSprites");
             if (Directory.Exists(fishSpritesFolder))
                 return;
 
