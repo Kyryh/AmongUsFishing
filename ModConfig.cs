@@ -9,6 +9,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using UnityEngine;
+using UObject = UnityEngine.Object;
 
 namespace AmongUsFishing {
     internal static class ModConfig {
@@ -52,7 +53,17 @@ namespace AmongUsFishing {
         }
 
         static Sprite SpriteFromImage(byte[] bytes) {
-            throw new NotImplementedException();
+            var texture = new Texture2D(0, 0);
+
+            texture.LoadImage(bytes);
+            UObject.DontDestroyOnLoad(texture);
+            texture.hideFlags |= HideFlags.HideAndDontSave;
+
+            var sprite = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
+            UObject.DontDestroyOnLoad(sprite);
+            sprite.hideFlags |= HideFlags.HideAndDontSave;
+
+            return sprite;
         }
     }
 }

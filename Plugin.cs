@@ -32,6 +32,7 @@ public class Plugin : BasePlugin
         // Plugin startup logic
         Log = base.Log;
 
+        IL2CPPMethods.Init();
         Patches.Init();
         ModConfig.Init(Config);
 
